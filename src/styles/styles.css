@@ -1,0 +1,27 @@
+grid {
+    margin: 10px;
+}
+
+window {
+    opacity: 0.8;
+    border-radius: 25px; /* very smooth corners */
+}
+
+.power-button {
+    background-color: #222;
+    border-radius: 15px;
+    padding: 10px 20px;
+}
+
+.power-button:hover {
+    background-color: #333;
+}
+
+.power-button-label {
+    font-size: 16px;
+    color: #fff;
+}
+
+.power-button-icon {
+    /* You can add margin, scaling, or effects here */
+}
