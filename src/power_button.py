@@ -6,9 +6,12 @@ class PowerButton(Gtk.Button):
         super().__init__()
 
         # Box to hold image and label
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=40)
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=50)
         box.set_halign(Gtk.Align.CENTER)
         box.set_valign(Gtk.Align.CENTER)
+        box.get_style_context().add_class("power-button-box")
+        self.set_relief(Gtk.ReliefStyle.NONE)  # Removes default button relief/padding
+        self.set_border_width(0) 
         self.add(box)
 
         # Image

@@ -18,8 +18,8 @@ class PowerMenu(Gtk.Window):
         self.set_can_focus(True)
         GtkLayerShell.init_for_window(self)
         GtkLayerShell.auto_exclusive_zone_enable(self)
-        GtkLayerShell.set_margin(self, GtkLayerShell.Edge.TOP, 10)
-        GtkLayerShell.set_margin(self, GtkLayerShell.Edge.BOTTOM, 10)
+        GtkLayerShell.set_margin(self, GtkLayerShell.Edge.TOP, 0)
+        GtkLayerShell.set_margin(self, GtkLayerShell.Edge.BOTTOM, 0)
     
     def on_button_clicked(self, command):
         """ 
@@ -33,8 +33,8 @@ class PowerMenu(Gtk.Window):
     def setup_grid(self):
         """ Setup the grid for the power buttons. """
         grid = Gtk.Grid()
-        grid.set_row_spacing(10)
-        grid.set_column_spacing(10)
+        # grid.set_row_spacing(10)
+        # grid.set_column_spacing(10)
         self.add(grid)
 
         row = 0
