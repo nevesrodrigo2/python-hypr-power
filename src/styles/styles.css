@@ -4,7 +4,7 @@ grid {
 
 window {
     opacity: 0.8;
-    border-radius: 25px; /* very smooth corners */
+    border-radius: 25px; 
 }
 
 .power-button {
@@ -23,5 +23,5 @@ window {
 }
 
 .power-button-icon {
-    /* You can add margin, scaling, or effects here */
+    
 }
