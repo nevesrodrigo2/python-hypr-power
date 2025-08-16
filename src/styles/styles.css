@@ -3,7 +3,7 @@ grid {
 }
 
 window {
-    opacity: 0.7;
+    opacity: 0.8;
     border-radius: 25px; 
 }
 
@@ -17,7 +17,6 @@ window {
 }
 
 .power-button-label {
-    font-size: 22px;
     color: #fff;
 }
 

@@ -1,3 +1,4 @@
+import os
 import subprocess
 import gi
 gi.require_version("Gtk", "3.0")
@@ -5,7 +6,6 @@ from gi.repository import Gtk, GtkLayerShell, Gdk
 
 from src.processes import processes
 from src.power_button import PowerButton
-import os
 import src.config as config
 
 class PowerMenu(Gtk.Window):
@@ -41,7 +41,7 @@ class PowerMenu(Gtk.Window):
         col = 0
 
         for action, command in processes.items():
-            icon_path = os.path.join(config.RESOURCES_DIR, f"{action}.png")
+            icon_path = os.path.join(config.ICONS_DIR, f"{action}.png")
             power_button = PowerButton(label_text=action.capitalize(), icon_path=icon_path)
             power_button.connect("clicked", lambda w, cmd=command: print(cmd))
             # keeping this commented out while testing
@@ -57,10 +57,10 @@ class PowerMenu(Gtk.Window):
     def setup_css(self):
         """ Setup the CSS for the window. """
         css_provider = Gtk.CssProvider()
-        css_provider.load_from_path(config.STYLES_DIR)  # Path to your file
+        css_provider.load_from_path(os.path.join(config.STYLES_DIR, "styles.css")) 
 
         Gtk.StyleContext.add_provider_for_screen(
             self.get_screen(),
             css_provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+            Gtk.STYLE_PROVIDER_PRIORITY_USER
         )

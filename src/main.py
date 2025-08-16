@@ -4,6 +4,11 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
 from src.power_menu import PowerMenu
+from src.settings import Settings
+import src.config as config
+
+settings = Settings()
+settings.set_font(config.FONT_TOTAL)
 
 window = PowerMenu()
 window.show_all()
