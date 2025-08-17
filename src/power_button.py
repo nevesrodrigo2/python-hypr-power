@@ -45,6 +45,5 @@ class PowerButton(Gtk.Button):
     
     def on_button_clicked(self, button):
 
-        print(f"Executing command: {self.command}")
-        # keeping this commented out while testing
-        # subprocess.run(self.command, shell=True)
+        # print(f"Executing command: {self.command}")
+        subprocess.run(self.command, shell=True)
