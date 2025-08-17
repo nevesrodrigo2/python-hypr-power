@@ -20,15 +20,6 @@ class PowerMenu(Gtk.Window):
         GtkLayerShell.auto_exclusive_zone_enable(self)
         GtkLayerShell.set_margin(self, GtkLayerShell.Edge.TOP, 0)
         GtkLayerShell.set_margin(self, GtkLayerShell.Edge.BOTTOM, 0)
-    
-    def on_button_clicked(self, command):
-        """ 
-        Execute the command associated with the button click. 
-
-        Args:
-            command (str): The command to execute.
-        """
-        subprocess.run(command, shell=True)
 
     def setup_grid(self):
         """ Setup the grid for the power buttons. """
@@ -42,11 +33,7 @@ class PowerMenu(Gtk.Window):
 
         for action, command in processes.items():
             icon_path = os.path.join(config.ICONS_DIR, f"{action}.png")
-            power_button = PowerButton(label_text=action.capitalize(), icon_path=icon_path)
-            power_button.connect("clicked", lambda w, cmd=command: print(cmd))
-            # keeping this commented out while testing
-            # power_button.connect("clicked", self.on_button_clicked, command)
-            power_button.set_size_request(400, 290)
+            power_button = PowerButton(label_text=action.capitalize(), icon_path=icon_path, command=command)
             grid.attach(power_button, col, row, 1, 1)
 
             col += 1

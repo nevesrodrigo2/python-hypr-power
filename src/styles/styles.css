@@ -1,26 +1,40 @@
-grid {
-    /* todo */
+* {
+    all: unset;
 }
 
 window {
     opacity: 0.8;
-    border-radius: 25px; 
+    background-color: rgba(28, 33, 43, 0.5);
 }
 
+grid {
+    /* todo */
+    background-color: rgba(28, 33, 43, 0.5);
+
+}
+
+
+
 .power-button {
-    /* background-color: #222; */
-    background-color: #1c222b;
+    background-color: rgba(28, 33, 43, 0.8);
+    padding: 10px;
+    transition: background 550ms ease-in-out;
 }
 
 .power-button:hover {
-    background-color: #A6AEBF;
-}
+    background-color: rgba(214, 214, 216, 0.3); 
 
+
+}
 .power-button-label {
     color: #fff;
 }
 
 .power-button-icon {
+    /* todo */
+}
+
+.power-button-icon:hover {
     /* todo */
 }
 
