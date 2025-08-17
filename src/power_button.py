@@ -47,3 +47,7 @@ class PowerButton(Gtk.Button):
 
         # print(f"Executing command: {self.command}")
         subprocess.run(self.command, shell=True)
+        # Close the window after executing the command
+        toplevel = self.get_toplevel()
+        if isinstance(toplevel, Gtk.Window):
+            toplevel.destroy()

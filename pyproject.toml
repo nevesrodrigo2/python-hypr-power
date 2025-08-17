@@ -1,0 +1,11 @@
+[project]
+name = "python-hypr-power"
+version = "1.0.0"
+description = "Hyprland power menu"
+authors = [
+    { name="nevesrodrigo2" }
+]
+requires-python = ">=3.10"
+
+[project.dependencies]
+PyGObject = "*"

@@ -1,7 +1,7 @@
 import os
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, GtkLayerShell, Gdk
+from gi.repository import Gtk, GtkLayerShell
 
 from src.processes import processes
 from src.power_button import PowerButton
