@@ -15,9 +15,6 @@ class PowerButton(Gtk.Button):
         # Box to hold image and label
         self.load_box()
 
-        self.set_relief(Gtk.ReliefStyle.NONE)  # Removes default button relief/padding
-        self.set_border_width(0) 
-
         # Image
         self.load_image()
 
