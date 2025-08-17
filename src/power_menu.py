@@ -1,7 +1,10 @@
 import os
+import subprocess
+import sys
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, GtkLayerShell
+gi.require_version("GtkLayerShell", "0.1") 
+from gi.repository import Gtk, GtkLayerShell, Gdk
 
 from src.processes import processes
 from src.power_button import PowerButton
@@ -10,15 +13,48 @@ import src.config as config
 class PowerMenu(Gtk.Window):
     def __init__(self):
         super().__init__(title="Power Menu")
+
+        
+        self.set_app_paintable(True)
+        screen = self.get_screen()
+        visual = screen.get_rgba_visual()
+        if visual:
+            self.set_visual(visual)
+
+        # buttons 
+        self.power_buttons = []
+        self.current_button_index = -1
+
+        # ---- LAYER SHELL  ----
+        GtkLayerShell.init_for_window(self)
+        GtkLayerShell.set_layer(self, GtkLayerShell.Layer.TOP)
+        GtkLayerShell.set_keyboard_mode(self, GtkLayerShell.KeyboardMode.EXCLUSIVE)
+
+        # Popup-like look/behavior
+        self.set_decorated(False)
+        self.set_keep_above(True)
+        self.set_can_focus(True)
+
+        # UI
         self.setup_css()
         self.setup_grid()
-        self.set_can_focus(True)
-        GtkLayerShell.init_for_window(self)
+
+        # Events
+        self.connect("key-press-event", self.on_escape)
+        self.connect("destroy", Gtk.main_quit)
+
+        # Show after all the above
+        self.show_all()
+    
+    def on_escape(self, widget, event):
+        """ Handle the escape key press event. """
+        if event.keyval == Gdk.KEY_Escape:
+            self.close()
 
     def setup_grid(self):
         """ Setup the grid for the power buttons. """
-        grid = Gtk.Grid()
-        self.add(grid)
+        self.grid = Gtk.Grid()
+        self.add(self.grid)
 
         row = 0
         col = 0
@@ -30,7 +66,10 @@ class PowerMenu(Gtk.Window):
                 icon_path=icon_path, 
                 command=command
             )
-            grid.attach(power_button, col, row, 1, 1)
+            power_button.connect("clicked", self.on_button_clicked)
+
+            self.grid.attach(power_button, col, row, 1, 1)
+            self.power_buttons.append(power_button)
 
             col += 1
             if col > 2:  # Move to the next row after 3 buttons
@@ -47,3 +86,13 @@ class PowerMenu(Gtk.Window):
             css_provider,
             Gtk.STYLE_PROVIDER_PRIORITY_USER
         )
+
+    def on_button_clicked(self, button):
+        """ Handle button click events. """
+        command = button.command
+        self.hide()  # Hide immediately
+
+        # run asynchronously
+        subprocess.Popen(command, shell=True)
+        self.destroy()
+        sys.exit(0)
