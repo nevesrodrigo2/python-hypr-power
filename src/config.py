@@ -9,7 +9,7 @@ ICONS_DIR  = os.path.join(RESOURCES_DIR, "icons")  # icons directory
 STYLES_DIR = os.path.join(BASE_DIR, "src", "styles")
 
 # FONT
-FONT_NAME = "Inter"
+FONT_NAME = "Monospace" 
 FONT_WEIGHT = "SemiBold"
-FONT_SIZE = 20
+FONT_SIZE = 18
 FONT_TOTAL = f"{FONT_NAME} {FONT_WEIGHT} {FONT_SIZE}"
