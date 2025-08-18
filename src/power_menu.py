@@ -12,9 +12,8 @@ import src.config as config
 
 class PowerMenu(Gtk.Window):
     def __init__(self):
-        super().__init__(title="Power Menu")
+        super().__init__(title="PowerMenu")
 
-        
         self.set_app_paintable(True)
         screen = self.get_screen()
         visual = screen.get_rgba_visual()
@@ -29,6 +28,7 @@ class PowerMenu(Gtk.Window):
         GtkLayerShell.init_for_window(self)
         GtkLayerShell.set_layer(self, GtkLayerShell.Layer.TOP)
         GtkLayerShell.set_keyboard_mode(self, GtkLayerShell.KeyboardMode.EXCLUSIVE)
+
 
         # Popup-like look/behavior
         self.set_decorated(False)
