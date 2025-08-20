@@ -1,11 +1,21 @@
+[build-system]
+requires = ["setuptools>=65.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "python-hypr-power"
 version = "1.0.0"
 description = "Hyprland power menu"
-authors = [
-    { name="nevesrodrigo2" }
-]
+authors = [{ name = "nevesrodrigo2" }]
 requires-python = ">=3.10"
+dependencies = ["PyGObject"]
 
-[project.dependencies]
-PyGObject = "*"
+[project.scripts]
+python-hypr-power = "python_hypr_power.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["python_hypr_power*"]
+
+[tool.setuptools.package-data]
+python_hypr_power = ["styles/*", "styles/**/*", "resources/*", "resources/**/*"]
