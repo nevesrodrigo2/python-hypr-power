@@ -1,5 +1,3 @@
-import subprocess
-from cProfile import label
 from gi.repository import Gtk, GdkPixbuf
 
 class PowerButton(Gtk.Button):

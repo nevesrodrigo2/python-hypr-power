@@ -2,13 +2,15 @@ import os
 import subprocess
 import sys
 import gi
+
 gi.require_version("Gtk", "3.0")
 gi.require_version("GtkLayerShell", "0.1") 
 from gi.repository import Gtk, GtkLayerShell, Gdk
 
-from src.processes import processes
-from src.power_button import PowerButton
-import src.config as config
+from python_hypr_power.processes import processes
+from python_hypr_power.power_button import PowerButton
+from python_hypr_power.logger import logger
+import python_hypr_power.config as config
 
 class PowerMenu(Gtk.Window):
     def __init__(self):
@@ -49,10 +51,13 @@ class PowerMenu(Gtk.Window):
     def on_escape(self, widget, event):
         """ Handle the escape key press event. """
         if event.keyval == Gdk.KEY_Escape:
+            logger.debug("Escape key pressed.")
+            logger.info("Closing Power Menu.")
             self.close()
 
     def setup_grid(self):
         """ Setup the grid for the power buttons. """
+        logger.debug("Setting up the grid for power buttons.")
         self.grid = Gtk.Grid()
         self.add(self.grid)
 
@@ -70,6 +75,7 @@ class PowerMenu(Gtk.Window):
 
             self.grid.attach(power_button, col, row, 1, 1)
             self.power_buttons.append(power_button)
+            logger.debug(f"Power button added: {action}")
 
             col += 1
             if col > 2:  # Move to the next row after 3 buttons
@@ -78,6 +84,7 @@ class PowerMenu(Gtk.Window):
 
     def setup_css(self):
         """ Setup the CSS for the window. """
+        logger.debug("Loading CSS styles.")
         css_provider = Gtk.CssProvider()
         css_provider.load_from_path(os.path.join(config.STYLES_DIR, "styles.css")) 
 
@@ -95,4 +102,6 @@ class PowerMenu(Gtk.Window):
         # run asynchronously
         subprocess.Popen(command, shell=True)
         self.destroy()
+        logger.debug(f"Executed command: {command}")
+        logger.info(f"Closing Power Menu.")
         sys.exit(0)
